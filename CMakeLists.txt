@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.5)
+project(TuYuIDCard)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIR})
+include_directories(3rdparty)
+include_directories(3rdparty/onnxruntime/include)
+link_directories(3rdparty/onnxruntime/lib)
+add_subdirectory(src)
