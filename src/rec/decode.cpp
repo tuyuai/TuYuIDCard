@@ -1,3 +1,7 @@
+// Copyright(c) TuYuAI authors.All rights reserved.
+// Licensed under the Apache-2.0 License.
+// 
+
 #include "decode.h"
 
 std::vector<int> GreedyDecode(const std::vector<int> &preds) {

@@ -1,3 +1,7 @@
+// Copyright(c) TuYuAI authors.All rights reserved.
+// Licensed under the Apache-2.0 License.
+// 
+
 #include "recognizer.h"
 #include <onnxruntime_c_api.h>
 #include <chrono>

@@ -1,3 +1,7 @@
+// Copyright(c) TuYuAI authors.All rights reserved.
+// Licensed under the Apache-2.0 License.
+// 
+
 #pragma once
 #include <opencv2/opencv.hpp>
 #include <string>
