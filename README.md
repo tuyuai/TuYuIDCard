@@ -17,16 +17,14 @@ cmake ..
 make -j4
 ```
 
-
-
 ## Test
 
+在百度云 链接: https://pan.baidu.com/s/1GwJPgZJiMNzfMcKA3o8ynA 提取码: wq7g 下载模型，然后将模型放在models目录下，进入build目录执行
 
-
-
-
-
+```shell
+./src/idcard_ocr_test ../models/det.onnx ../models/rec.onnx ../images/test.jpg
+```
 
 ## License
 
-
+This project is licensed under the [Apache-2.0 License](LICENSE).
