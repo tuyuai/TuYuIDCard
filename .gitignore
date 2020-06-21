@@ -1,6 +1,7 @@
 .DS_Store
 build
-models
+models/*
+3rdparty/onnxruntime/*
 
 # Prerequisites
 *.d
