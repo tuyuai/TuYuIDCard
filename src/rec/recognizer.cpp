@@ -1,6 +1,6 @@
 // Copyright(c) TuYuAI authors.All rights reserved.
 // Licensed under the Apache-2.0 License.
-// 
+//
 
 #include "recognizer.h"
 #include <onnxruntime_c_api.h>
@@ -135,7 +135,7 @@ std::string Recognizer::Predict(const cv::Mat& image) {
   std::string ret_result;
   for (int i = 0; i < result.size(); i++) {
     int idx = result[i];
-    ret_result += alphabets[idx-1];
+    ret_result += alphabets[idx - 1];
   }
 
   return ret_result;

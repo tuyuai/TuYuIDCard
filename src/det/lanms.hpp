@@ -243,19 +243,24 @@ std::vector<std::vector<float>> polys2floats(
   return ret;
 }
 
-std::vector<std::vector<float>> polys2floats_new(std::vector<lanms::Polygon> &polys) {
+std::vector<std::vector<float>> polys2floats_new(
+    std::vector<lanms::Polygon> &polys) {
   std::vector<std::vector<float>> ret;
-  for (size_t i = 0; i < polys.size(); i ++) {
+  for (size_t i = 0; i < polys.size(); i++) {
     auto &p = polys[i];
     auto &poly = p.poly;
     ret.emplace_back(std::vector<float>{
-        float(static_cast<double>(poly[0].X) / 10000.0), float(static_cast<double>(poly[0].Y) / 10000.0),
-        float(static_cast<double>(poly[1].X) / 10000.0), float(static_cast<double>(poly[1].Y) / 10000.0),
-        float(static_cast<double>(poly[2].X) / 10000.0), float(static_cast<double>(poly[2].Y) / 10000.0),
-        float(static_cast<double>(poly[3].X) / 10000.0), float(static_cast<double>(poly[3].Y) / 10000.0),
+        float(static_cast<double>(poly[0].X) / 10000.0),
+        float(static_cast<double>(poly[0].Y) / 10000.0),
+        float(static_cast<double>(poly[1].X) / 10000.0),
+        float(static_cast<double>(poly[1].Y) / 10000.0),
+        float(static_cast<double>(poly[2].X) / 10000.0),
+        float(static_cast<double>(poly[2].Y) / 10000.0),
+        float(static_cast<double>(poly[3].X) / 10000.0),
+        float(static_cast<double>(poly[3].Y) / 10000.0),
         float(p.score),
-        });
-   } 
+    });
+  }
   return ret;
 }
 

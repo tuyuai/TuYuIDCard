@@ -1,6 +1,6 @@
 // Copyright(c) TuYuAI authors.All rights reserved.
 // Licensed under the Apache-2.0 License.
-// 
+//
 
 #include "detector.h"
 #include <chrono>
@@ -60,7 +60,8 @@ void Detector::GetInputs() {
     OrtTypeInfo* typeinfo;
     status = ort_api_->SessionGetInputTypeInfo(session_, i, &typeinfo);
     const OrtTensorTypeAndShapeInfo* tensor_info;
-    ORT_ABORT_ON_ERROR(ort_api_->CastTypeInfoToTensorInfo(typeinfo, &tensor_info));
+    ORT_ABORT_ON_ERROR(
+        ort_api_->CastTypeInfoToTensorInfo(typeinfo, &tensor_info));
     ONNXTensorElementDataType type;
     ORT_ABORT_ON_ERROR(ort_api_->GetTensorElementType(tensor_info, &type));
     printf("Input %zu : type=%d\n", i, type);
@@ -80,17 +81,14 @@ void Detector::GetInputs() {
 }
 
 void Detector::GetTensorDataAndShape(OrtValue* input_map, float** array,
-                           std::vector<int64_t>& node_dims) {
-  ORT_ABORT_ON_ERROR(
-      ort_api_->GetTensorMutableData(input_map, (void**)array));
+                                     std::vector<int64_t>& node_dims) {
+  ORT_ABORT_ON_ERROR(ort_api_->GetTensorMutableData(input_map, (void**)array));
 
   OrtTensorTypeAndShapeInfo* tensor_info;
-  ORT_ABORT_ON_ERROR(
-      ort_api_->GetTensorTypeAndShape(input_map, &tensor_info));
+  ORT_ABORT_ON_ERROR(ort_api_->GetTensorTypeAndShape(input_map, &tensor_info));
 
   size_t num_dims;
-  ORT_ABORT_ON_ERROR(
-      ort_api_->GetDimensionsCount(tensor_info, &num_dims));
+  ORT_ABORT_ON_ERROR(ort_api_->GetDimensionsCount(tensor_info, &num_dims));
   node_dims.resize(num_dims);
   ORT_ABORT_ON_ERROR(ort_api_->GetDimensions(
       tensor_info, (int64_t*)node_dims.data(), num_dims));
@@ -271,7 +269,8 @@ void Detector::Predict(const cv::Mat& image,
   float ratio_w;
   Preprocess(image, out_image, ratio_w, ratio_h);
   SPDLOG_DEBUG("image h={} w={} resize h={} w={} ratio h={} ratio w = {}",
-               image.rows, image.cols, out_image.rows, out_image.cols, ratio_h, ratio_w);
+               image.rows, image.cols, out_image.rows, out_image.cols, ratio_h,
+               ratio_w);
   int image_width = out_image.cols;
   int image_height = out_image.rows;
   int image_channels = out_image.channels();
@@ -297,9 +296,8 @@ void Detector::Predict(const cv::Mat& image,
   // const char* input_names[] = {"input_images:0"};
   // const char* output_names[] = {"feature_fusion/concat_3:0",
   //                               "feature_fusion/Conv_7/Sigmoid:0"};
-const char* input_names[] = {"input"};
-  const char* output_names[] = {"geo_map",
-                                "score_map"};
+  const char* input_names[] = {"input"};
+  const char* output_names[] = {"geo_map", "score_map"};
 
   OrtValue* output_tensor[2];
   output_tensor[0] = NULL;
@@ -336,7 +334,7 @@ const char* input_names[] = {"input"};
   std::vector<Polygon> polys =
       merge_quadrangle_n9(quad_data.data(), quad_data.size() / 9, 0.2);
   std::vector<std::vector<float>> boxes = polys2floats_new(polys);
-  
+
   for (int i = 0; i < boxes.size(); i++) {
     auto box = boxes[i];
     std::vector<cv::Point2f> line_item;
@@ -354,19 +352,16 @@ const char* input_names[] = {"input"};
   return;
 }
 
-cv::Mat Detector::ShowTextLines(const cv::Mat &input, std::vector<std::vector<cv::Point2f>> &textlines) {
-    cv::Mat image = input.clone();
-    for (int i = 0; i < textlines.size(); i++) {
-        std::vector<cv::Point2f>& pts = textlines[i];
-    cv::line(image, pts[0], pts[1],
-             cv::Scalar(0, 255, 0), 2);
-    cv::line(image, pts[1], pts[2],
-             cv::Scalar(0, 255, 0), 2);
-    cv::line(image, pts[2], pts[3],
-             cv::Scalar(0, 255, 0), 2);
-    cv::line(image, pts[3], pts[0],
-             cv::Scalar(0, 255, 0), 2);
+cv::Mat Detector::ShowTextLines(
+    const cv::Mat& input, std::vector<std::vector<cv::Point2f>>& textlines) {
+  cv::Mat image = input.clone();
+  for (int i = 0; i < textlines.size(); i++) {
+    std::vector<cv::Point2f>& pts = textlines[i];
+    cv::line(image, pts[0], pts[1], cv::Scalar(0, 255, 0), 2);
+    cv::line(image, pts[1], pts[2], cv::Scalar(0, 255, 0), 2);
+    cv::line(image, pts[2], pts[3], cv::Scalar(0, 255, 0), 2);
+    cv::line(image, pts[3], pts[0], cv::Scalar(0, 255, 0), 2);
   }
 
-    return image;
+  return image;
 }
