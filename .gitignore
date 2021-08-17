@@ -1,6 +1,7 @@
 .DS_Store
 build
 .vscode
+third_party
 models/*.onnx
 3rdparty/onnxruntime/*
 

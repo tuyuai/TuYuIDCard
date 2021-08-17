@@ -3,11 +3,12 @@
 //
 
 #pragma once
+#include "common/common.h"
 #include <opencv2/opencv.hpp>
 #include <string>
 #include "onnxruntime_c_api.h"
 
-class Detector {
+class TUYUIDCARD_API Detector {
  public:
   Detector(const OrtApi* ort_api, OrtEnv* env)
       : ort_api_(ort_api),

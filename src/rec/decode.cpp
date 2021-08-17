@@ -1,7 +1,10 @@
-// Copyright(c) TuYuAI authors.All rights reserved.
+﻿// Copyright(c) TuYuAI authors.All rights reserved.
 // Licensed under the Apache-2.0 License.
 //
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1900) 
+# pragma execution_character_set("utf-8")
+#endif
 #include "decode.h"
 
 std::vector<int> GreedyDecode(const std::vector<int> &preds) {

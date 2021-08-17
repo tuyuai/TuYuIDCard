@@ -33,8 +33,16 @@ void Recognizer::InitModel(const std::string& model_path) {
   ORT_ABORT_ON_ERROR(ort_api_->CreateSessionOptions(&session_options_));
   ort_api_->SetIntraOpNumThreads(session_options_, 1);
   ort_api_->SetSessionGraphOptimizationLevel(session_options_, ORT_ENABLE_ALL);
+  
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+  std::wstring w_model_path;
+  ORT_ABORT_ON_ERROR(ort_api_->CreateSession(env_, w_model_path.c_str(),
+      session_options_, &session_));
+#else 
   ORT_ABORT_ON_ERROR(ort_api_->CreateSession(env_, model_path.c_str(),
-                                             session_options_, &session_));
+      session_options_, &session_));
+#endif 
 }
 
 std::string Recognizer::Predict(const cv::Mat& image) {

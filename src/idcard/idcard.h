@@ -1,8 +1,9 @@
 #pragma once
+#include "common/common.h"
 #include "det/detector.h"
 #include "rec/recognizer.h"
 
-class IDCardOCR {
+class TUYUIDCARD_API  IDCardOCR {
  public:
   IDCardOCR(const OrtApi* ort_api, OrtEnv* env)
       : ort_api_(ort_api), env_(env) {}
