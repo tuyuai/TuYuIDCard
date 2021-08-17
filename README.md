@@ -1,17 +1,24 @@
 # TuYuIDCard
-高精度跨平台身份证识别，全C++实现， 支持Windows，Linux， MacOS。
+TuYuIDCard高精度跨平台身份证识别，全C++实现， 支持Windows，Linux， MacOS。
 
-## Prerequst
-1. opencv
+在线身份证OCR demo [**TuYuIDCard**](http://49.235.99.66/)
 
-2. onnxruntime
-  在 https://github.com/microsoft/onnxruntime/releases/tag/v1.3.0 下载合适版本的onnxruntime并放在3rdparty目录下，并重命名为onnxruntime。
+## 下载代码和依赖
+本项目依赖opencv-4.5.2， onnxruntime-1.8.0,  windows下要求VisualStudio2019，linux 下GCC>6.0， cmake > 3.5。
 
-  
+下载代码
+
+`git clone https://github.com/tuyuai/TuYuIDCard.git`
+
+下载模型和依赖
+
+在百度网盘下载  链接：https://pan.baidu.com/s/1V-xcXYJptHy_ud51P_aCGw  提取码：ygho ， 并放入TuYuIDCard目录下。
+
+
+
 ## Build
 
 ```shell
-git clone https://github.com/tuyuai/TuYuIDCard.git
 cd TuYuIDCard && mkdir build && cd build
 cmake ..
 make -j4
@@ -19,7 +26,7 @@ make -j4
 
 ## Test
 
-在百度云 链接: https://pan.baidu.com/s/1GwJPgZJiMNzfMcKA3o8ynA 提取码: wq7g 下载模型，然后将模型放在models目录下，进入build目录执行
+在build目录下执行
 
 ```shell
 ./src/idcard_ocr_test ../models/det.onnx ../models/rec.onnx ../images/test.jpg
